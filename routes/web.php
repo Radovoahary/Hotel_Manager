@@ -24,4 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+use App\Http\Controllers\RoomController;
+
+Route::get('/rooms', [RoomController::class, 'index'])->middleware(['auth'])->name('rooms.index');
 require __DIR__.'/auth.php';
