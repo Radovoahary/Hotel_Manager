@@ -33,6 +33,13 @@ export default function Authenticated({
                                 >
                                     Dashboard
                                 </NavLink>
+
+                                <NavLink
+                                href={route('rooms.index')}
+                                active={route().current('rooms.index')}
+                                >
+                                Gestion des Chambres    
+                                </NavLink>
                             </div>
                         </div>
 
