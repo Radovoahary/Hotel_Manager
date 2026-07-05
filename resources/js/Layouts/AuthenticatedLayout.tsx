@@ -148,6 +148,13 @@ export default function Authenticated({
                         >
                             Gestion des Chambres
                         </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                        href={route('clients.index')}
+                        active={route().current('clients.index')}
+                        > 
+                            Gestion des Clients
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
