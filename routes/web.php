@@ -6,6 +6,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ReservationController;
+use App\Models\Room;
+use App\Models\Client;
+use App\Models\Reservation;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -18,7 +21,21 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'stats' => [
+            'total_rooms' => Room::count(),
+            'occupied_rooms' => Room::where('status', 'occupied')->count(),
+            'available_rooms' => Room::where('status', 'available')->count(),
+            'total_clients' => Client::count(),
+            'total_reservations' => Reservation::count(),
+            'revenue' => Reservation::where('status', 'confirmed')->sum('total_price'),
+        ],
+        // On récupère les 5 dernières réservations avec les infos du client pour l'affichage rapide
+        'recent_reservations' => Reservation::with(['client', 'room'])
+            ->latest()
+            ->take(5)
+            ->get(),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Toutes les routes nécessitant d'être connecté sont regroupées ici
