@@ -9,7 +9,9 @@ export default function Authenticated({
     header,
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-    const user = usePage().props.auth.user;
+    // On utilise directement le type 'PageProps' global automatique de Laravel Breeze
+    const { auth } = usePage().props;
+    const user = auth.user;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
@@ -26,6 +28,7 @@ export default function Authenticated({
                                 </Link>
                             </div>
 
+                            {/* BARRE DE NAVIGATION LARGE */}
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
                                     href={route('dashboard')}
@@ -35,10 +38,10 @@ export default function Authenticated({
                                 </NavLink>
 
                                 <NavLink
-                                href={route('rooms.index')}
-                                active={route().current('rooms.index')}
+                                    href={route('rooms.index')}
+                                    active={route().current('rooms.index')}
                                 >
-                                Gestion des Chambres    
+                                    Gestion des Chambres    
                                 </NavLink>
                             </div>
                         </div>
@@ -71,9 +74,7 @@ export default function Authenticated({
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                        >
+                                        <Dropdown.Link href={route('profile.edit')}>
                                             Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
@@ -104,22 +105,14 @@ export default function Authenticated({
                                     viewBox="0 0 24 24"
                                 >
                                     <path
-                                        className={
-                                            !showingNavigationDropdown
-                                                ? 'inline-flex'
-                                                : 'hidden'
-                                        }
+                                        className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M4 6h16M4 12h16M4 18h16"
                                     />
                                     <path
-                                        className={
-                                            showingNavigationDropdown
-                                                ? 'inline-flex'
-                                                : 'hidden'
-                                        }
+                                        className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
@@ -131,12 +124,8 @@ export default function Authenticated({
                     </div>
                 </div>
 
-                <div
-                    className={
-                        (showingNavigationDropdown ? 'block' : 'hidden') +
-                        ' sm:hidden'
-                    }
-                >
+                {/* BARRE DE NAVIGATION VERSION MOBILE */}
+                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
                             href={route('dashboard')}
@@ -144,16 +133,20 @@ export default function Authenticated({
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        
+                        {/* CORRECTION : Ajout du bouton manquant sur mobile */}
+                        <ResponsiveNavLink
+                            href={route('rooms.index')}
+                            active={route().current('rooms.index')}
+                        >
+                            Gestion des Chambres
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
                         <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
-                                {user.name}
-                            </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
-                            </div>
+                            <div className="text-base font-medium text-gray-800">{user.name}</div>
+                            <div className="text-sm font-medium text-gray-500">{user.email}</div>
                         </div>
 
                         <div className="mt-3 space-y-1">
