@@ -50,6 +50,13 @@ export default function Authenticated({
                                 >
                              Gestion des Clients
                                 </NavLink>
+
+                                <NavLink
+                                href={route('reservations.index')}
+                                active={route().current('reservations.index')}
+                                >
+                                Réservations
+                                </NavLink>
                             </div>
                         </div>
 
@@ -154,6 +161,13 @@ export default function Authenticated({
                         active={route().current('clients.index')}
                         > 
                             Gestion des Clients
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                         href={route('reservations.index')}
+                        active={route().current('reservations.index')}
+                        >
+                        Réservations    
                         </ResponsiveNavLink>
                     </div>
 
