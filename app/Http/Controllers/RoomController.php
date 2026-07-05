@@ -3,19 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class RoomController extends Controller 
+class RoomController extends Controller
 {
     public function index()
     {
-        // Récupération de toutes les chambres de la base de données
-        $rooms = Room::all();
-        
-        // On les envoie au composant React "Rooms/Index"
         return Inertia::render('Rooms/Index', [
-            'rooms' => $rooms
+            'rooms' => Room::all()
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'room_number' => 'required|string|unique:rooms,room_number|max:10',
+            'type' => 'required|string|max:255',
+            'price_per_night' => 'required|numeric|min:0',
+            'status' => 'required|in:available,occupied,maintenance',
+        ]);
+
+        Room::create($validated);
+
+        return redirect()->route('rooms.index');
     }
 }
