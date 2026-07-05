@@ -14,4 +14,17 @@ class ClientController extends Controller
             'clients' => Client::all()
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|unique:clients,email',
+            'phone' => 'nullable|string|max:20',
+        ]);
+        Client::create($validated);
+
+        return redirect()->route('clients.index');
+    }
 }
