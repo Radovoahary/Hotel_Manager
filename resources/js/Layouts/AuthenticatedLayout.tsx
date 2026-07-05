@@ -43,6 +43,13 @@ export default function Authenticated({
                                 >
                                     Gestion des Chambres    
                                 </NavLink>
+
+                                <NavLink
+                                     href={route('clients.index')}
+                                    active={route().current('clients.index')}
+                                >
+                             Gestion des Clients
+                                </NavLink>
                             </div>
                         </div>
 
