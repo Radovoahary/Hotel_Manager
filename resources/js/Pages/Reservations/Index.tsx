@@ -77,71 +77,86 @@ export default function Index({ reservations, clients, rooms }: Props) {
 
     return (
         <AuthenticatedLayout
-            header={<h2 className="text-xl font-semibold text-gray-800">Gestion des Réservations</h2>}
+            header={<h2 className="text-xl font-bold tracking-tight text-white">Gestion des Réservations</h2>}
         >
             <Head title="Réservations" />
 
-            <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div className="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 
                 {/* EN-TÊTE AVEC BOUTON NOUVELLE RÉSERVATION */}
-                <div className="flex justify-between items-center bg-white p-6 shadow sm:rounded-lg">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#12111A] border border-[#1F1D2C] p-6 rounded-2xl shadow-xl">
                     <div>
-                        <h3 className="text-lg font-bold text-gray-700">Historique des Réservations</h3>
-                        <p className="text-sm text-gray-500">Consultez et planifiez les séjours de vos clients.</p>
+                        <h3 className="text-lg font-bold text-white">Historique des Réservations</h3>
+                        <p className="text-sm text-gray-400 mt-1">Consultez et planifiez les séjours de vos clients.</p>
                     </div>
                     <button
                         onClick={() => setIsOpen(true)}
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow transition"
+                        className="inline-flex justify-center items-center rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-5 shadow-lg shadow-indigo-600/20 transition-all duration-150 active:scale-95"
                     >
-                        Nouvelle Réservation
+                        <span className="mr-2">📅</span> Nouvelle Réservation
                     </button>
                 </div>
 
                 {/* TABLEAU DE LA LISTE DES RÉSERVATIONS */}
-                <div className="bg-white shadow sm:rounded-lg overflow-hidden">
+                <div className="bg-[#12111A] border border-[#1F1D2C] rounded-2xl shadow-2xl overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
+                        <table className="min-w-full divide-y divide-[#1F1D2C]">
+                            <thead className="bg-[#161522]">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Client</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Chambre</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Arrivée</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Départ</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prix Total</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Client</th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Chambre</th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Arrivée</th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Départ</th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-400 uppercase tracking-wider">Prix Total</th>
+                                    <th className="px-6 py-4 text-right text-xs font-bold text-gray-400 uppercase tracking-wider">Statut</th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
+                            <tbody className="divide-y divide-[#1F1D2C]">
                                 {reservations.length === 0 ? (
                                     <tr>
-                                        <td colSpan={6} className="px-6 py-10 text-center text-sm text-gray-500">
+                                        <td colSpan={6} className="px-6 py-12 text-center text-sm text-gray-400">
+                                            <div className="text-2xl mb-2">📭</div>
                                             Aucune réservation trouvée.
                                         </td>
                                     </tr>
                                 ) : (
                                     reservations.map((reservation) => (
-                                        <tr key={reservation.id}>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {reservation.client ? `${reservation.client.first_name} ${reservation.client.last_name}` : <span className="text-red-400 italic">Client supprimé</span>}
+                                        <tr key={reservation.id} className="hover:bg-[#1A1926] transition-colors duration-150">
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">
+                                                {reservation.client ? (
+                                                    `${reservation.client.first_name} ${reservation.client.last_name}`
+                                                ) : (
+                                                    <span className="text-rose-400 italic font-normal">Client supprimé</span>
+                                                )}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {reservation.room ? `N°${reservation.room.room_number} (${reservation.room.type})` : <span className="text-red-400 italic">Chambre supprimée</span>}
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                                {reservation.room ? (
+                                                    <span className="bg-[#1F1D2C] px-2.5 py-1 rounded-lg text-xs font-medium text-indigo-300 border border-[#2A283E]">
+                                                        N°{reservation.room.room_number} • {reservation.room.type}
+                                                    </span>
+                                                ) : (
+                                                    <span className="text-rose-400 italic">Chambre supprimée</span>
+                                                )}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-mono">
                                                 {new Date(reservation.start_date).toLocaleDateString()}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-mono">
                                                 {new Date(reservation.end_date).toLocaleDateString()}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-black text-white">
                                                 {Number(reservation.total_price).toFixed(2)} €
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm">
-                                                <span className={`inline-block px-2 py-1 text-xs font-bold rounded-full ${
-                                                    reservation.status === 'confirmed' ? 'bg-green-100 text-green-800' :
-                                                    reservation.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
-                                                    'bg-red-100 text-red-800'
+                                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
+                                                <span className={`inline-flex items-center px-2.5 py-1 text-xs font-bold rounded-xl border ${
+                                                    reservation.status === 'confirmed' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
+                                                    reservation.status === 'pending' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 
+                                                    'bg-rose-500/10 text-rose-400 border-rose-500/20'
                                                 }`}>
+                                                    <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
+                                                        reservation.status === 'confirmed' ? 'bg-emerald-400' :
+                                                        reservation.status === 'pending' ? 'bg-amber-400' : 'bg-rose-400'
+                                                    }`} />
                                                     {reservation.status === 'confirmed' ? 'Confirmée' : reservation.status === 'pending' ? 'En attente' : 'Annulée'}
                                                 </span>
                                             </td>
@@ -155,90 +170,93 @@ export default function Index({ reservations, clients, rooms }: Props) {
 
                 {/* MODAL / POPUP DE CRÉATION DE RÉSERVATION */}
                 {isOpen && (
-                    <div className="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 flex items-center justify-center p-4">
-                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 space-y-4">
-                            <h3 className="text-lg font-bold text-gray-900">Créer une nouvelle réservation</h3>
+                    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+                        <div className="bg-[#12111A] border border-[#2A283E] rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150">
+                            <h3 className="text-lg font-black text-white tracking-tight">✨ Créer une nouvelle réservation</h3>
                             
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 {/* Choix du Client */}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700">Client</label>
+                                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400">Client</label>
                                     <select
                                         value={data.client_id}
                                         onChange={e => setData('client_id', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500"
+                                        className="mt-1.5 block w-full rounded-xl bg-[#1A1926] border-[#2A283E] text-white focus:border-indigo-500 focus:ring-indigo-500/20 shadow-inner"
                                     >
-                                        <option value="">Sélectionner un client</option>
+                                        <option value="" className="bg-[#12111A]">Sélectionner un client</option>
                                         {clients.map(client => (
-                                            <option key={client.id} value={client.id}>
+                                            <option key={client.id} value={client.id} className="bg-[#1A1926]">
                                                 {client.first_name} {client.last_name}
                                             </option>
                                         ))}
                                     </select>
-                                    {errors.client_id && <p className="text-red-500 text-xs mt-1">{errors.client_id}</p>}
+                                    {errors.client_id && <p className="text-rose-400 text-xs mt-1 font-medium">{errors.client_id}</p>}
                                 </div>
 
                                 {/* Choix de la Chambre */}
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700">Chambre</label>
+                                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400">Chambre</label>
                                     <select
                                         value={data.room_id}
                                         onChange={e => setData('room_id', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500"
+                                        className="mt-1.5 block w-full rounded-xl bg-[#1A1926] border-[#2A283E] text-white focus:border-indigo-500 focus:ring-indigo-500/20 shadow-inner"
                                     >
-                                        <option value="">Sélectionner une chambre disponible</option>
+                                        <option value="" className="bg-[#12111A]">Sélectionner une chambre</option>
                                         {rooms.map(room => (
-                                            <option key={room.id} value={room.id}>
+                                            <option key={room.id} value={room.id} className="bg-[#1A1926]">
                                                 N°{room.room_number} - {room.type} ({room.price_per_night}€/nuit)
                                             </option>
                                         ))}
                                     </select>
-                                    {errors.room_id && <p className="text-red-500 text-xs mt-1">{errors.room_id}</p>}
+                                    {errors.room_id && <p className="text-rose-400 text-xs mt-1 font-medium">{errors.room_id}</p>}
                                 </div>
 
-                                {/* Date d'arrivée */}
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Date d'arrivée</label>
-                                    <input
-                                        type="date"
-                                        value={data.start_date}
-                                        onChange={e => setData('start_date', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500"
-                                    />
-                                    {errors.start_date && <p className="text-red-500 text-xs mt-1">{errors.start_date}</p>}
-                                </div>
+                                {/* Dates d'arrivée et de départ */}
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase tracking-wider text-gray-400">Arrivée</label>
+                                        <input
+                                            type="date"
+                                            value={data.start_date}
+                                            onChange={e => setData('start_date', e.target.value)}
+                                            className="mt-1.5 block w-full rounded-xl bg-[#1A1926] border-[#2A283E] text-white focus:border-indigo-500 focus:ring-indigo-500/20 shadow-inner"
+                                        />
+                                        {errors.start_date && <p className="text-rose-400 text-xs mt-1 font-medium">{errors.start_date}</p>}
+                                    </div>
 
-                                {/* Date de départ */}
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Date de départ</label>
-                                    <input
-                                        type="date"
-                                        value={data.end_date}
-                                        onChange={e => setData('end_date', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500"
-                                    />
-                                    {errors.end_date && <p className="text-red-500 text-xs mt-1">{errors.end_date}</p>}
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase tracking-wider text-gray-400">Départ</label>
+                                        <input
+                                            type="date"
+                                            value={data.end_date}
+                                            onChange={e => setData('end_date', e.target.value)}
+                                            className="mt-1.5 block w-full rounded-xl bg-[#1A1926] border-[#2A283E] text-white focus:border-indigo-500 focus:ring-indigo-500/20 shadow-inner"
+                                        />
+                                        {errors.end_date && <p className="text-rose-400 text-xs mt-1 font-medium">{errors.end_date}</p>}
+                                    </div>
                                 </div>
 
                                 {/* Affichage automatique du prix estimé */}
-                                <div className="p-3 bg-gray-50 rounded-md border border-gray-200">
-                                    <span className="text-sm font-medium text-gray-500">Prix Total Calculé : </span>
-                                    <span className="text-lg font-bold text-indigo-600">{data.total_price.toFixed(2)} €</span>
+                                <div className="p-4 bg-[#161522] rounded-xl border border-[#1F1D2C] flex justify-between items-center">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-gray-400">Prix Total Estimé</span>
+                                    <span className="text-xl font-black text-indigo-400 font-mono">
+                                        {data.total_price.toFixed(2)} €
+                                    </span>
                                 </div>
 
                                 {/* Boutons d'action */}
-                                <div className="flex justify-end space-x-3 pt-2">
+                                <div className="flex justify-end space-x-3 pt-4 border-t border-[#1F1D2C]">
                                     <button
                                         type="button"
                                         onClick={() => setIsOpen(false)}
-                                        className="bg-gray-250 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded transition"
+                                        className="bg-[#1F1D2C] hover:bg-[#2A283E] text-gray-300 font-semibold py-2 px-4 rounded-xl transition duration-150"
                                     >
                                         Annuler
                                     </button>
                                     <button
                                         type="submit"
                                         disabled={processing}
-                                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow transition disabled:opacity-50"
+                                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-5 rounded-xl shadow-lg shadow-indigo-600/20 transition duration-150 disabled:opacity-50"
                                     >
                                         {processing ? 'Enregistrement...' : 'Confirmer'}
                                     </button>
