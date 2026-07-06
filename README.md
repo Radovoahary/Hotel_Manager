@@ -1,59 +1,54 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏨 Hotel Manager - Système de Gestion Hôtelière
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Une application web moderne, fluide et performante conçue pour centraliser et simplifier la gestion quotidienne d'un établissement hôtelier (chambres, clients, réservations et statistiques).
 
-## About Laravel
+Le projet utilise une architecture moderne combinant la puissance backend de **Laravel 12**, la réactivité frontend de **React** (avec **TypeScript** et **Tailwind CSS**), le tout orchestré sans API complexe grâce à **Inertia.js**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Fonctionnalités Principales
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📊 1. Tableau de Bord (Dashboard)
+* **Indicateurs clés en temps réel :** Affichage dynamique du nombre total de chambres, du volume de clients enregistrés, du cumul des réservations et des revenus totaux générés par l'établissement.
+* **Architecture réactive :** Calcul automatique et synchronisation directe des indicateurs dès qu'une action (création/suppression) survient sur l'application.
 
-## Learning Laravel
+### 🛏️ 2. Gestion des Chambres (CRUD Complet)
+* **Création & Édition via Modal Dynamique :** Un formulaire intelligent unique gère à la fois l'ajout de nouvelles chambres et la modification des chambres existantes.
+* **Gestion complète des données :** Configuration du numéro de chambre, du type (ex: Suite, Double Deluxe), du tarif par nuit, ainsi que du statut.
+* **Cycle de statut :** Prise en charge des états de disponibilité (`Disponible`, `Occupée`, `Maintenance`).
+* **Suppression sécurisée :** Suppression d'une chambre avec boîte de dialogue de confirmation pour éviter les erreurs de manipulation.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 👥 3. Fichier des Clients (CRUD Complet)
+* **Registre centralisé :** Suivi rigoureux de l'identité des clients (Prénom, Nom, Email unique, Téléphone optionnel).
+* **Contrôles de doublons intelligents :** Validation backend stricte interdisant l'usage d'une même adresse email pour deux clients distincts, tout en autorisant intelligemment un client à conserver son email lors de la modification de sa propre fiche.
+* **Gestion unifiée :** Ajout, modification fluide et suppression définitive à partir d'une interface de tableau épurée.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📅 4. Planning & Réservations
+* **Formulaire d'affectation direct :** Prise en compte de la liaison logique stricte entre un client existant et une chambre disponible.
+* **Calculateur de séjour :** Enregistrement des dates d'arrivée (`check_in_date`) et de départ (`check_out_date`) avec gestion automatique des prix globaux.
+* **Automatisation des statuts :** Dès qu'une réservation est validée et confirmée, l'application bascule automatiquement le statut de la chambre associée en mode `Occupée`.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Guide d'Installation et Lancement (Pas à Pas)
 
-### Premium Partners
+Suis scrupuleusement ces étapes pour installer et faire tourner l'application sur ta machine locale.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Prérequis
+Assure-toi d'avoir installé sur ton système :
+* **PHP 8.2+**
+* **Composer** (Gestionnaire de paquets PHP)
+* **Node.js** (Version 18 ou supérieure) & **npm**
+* Un serveur de base de données (ex: **XAMPP**, **WampServer**, **Laragon**) avec **MySQL**.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Étape 1 : Clonage et installation des dépendances
+Ouvre ton terminal dans le dossier où se trouve le projet :
 
-## Code of Conduct
+```bash
+# 1. Installe les dépendances PHP du Backend
+composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# 2. Installe les paquets JavaScript du Frontend
+npm install
