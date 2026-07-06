@@ -28,4 +28,16 @@ class RoomController extends Controller
 
         return redirect()->route('rooms.index');
     }
+
+    public function update(Request $request, Room $room)
+{
+    $validated = $request->validate([
+        'status' => 'required|in:available,occupied,maintenance',
+    ]);
+
+    $room->update($validated);
+
+    return redirect()->route('rooms.index');
+}
+
 }

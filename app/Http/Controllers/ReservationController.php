@@ -12,28 +12,40 @@ class ReservationController extends Controller
 {
     public function index()
     {
+        // C'est cette ligne qui charge les données nécessaires pour le tableau !
         return Inertia::render('Reservations/Index', [
-            // On charge les réservations en incluant les données du client et de la chambre associée (Eager Loading)
-            'reservations' => Reservation::with(['client', 'room'])->get(),
+            'reservations' => Reservation::with(['client', 'room'])->latest()->get(),
             'clients' => Client::all(),
-            'rooms' => Room::where('status', 'available')->get(), // Uniquement les chambres libres
+            'rooms' => Room::where('status', 'available')->get(), // Uniquement les chambres dispos pour une nouvelle résa
         ]);
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'room_id' => 'required|exists:rooms,id',
-            'check_in_date' => 'required|date|after_or_equal:today',
-            'check_out_date' => 'required|date|after:check_in_date',
-            'total_price' => 'required|numeric|min:0',
-        ]);
+   public function store(Request $request)
+{
+    // 1. On valide les données reçues de React (qui utilise start_date et end_date)
+    $validated = $request->validate([
+        'client_id' => 'required|exists:clients,id',
+        'room_id' => 'required|exists:rooms,id',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after:start_date',
+        'total_price' => 'required|numeric|min:0',
+        'status' => 'required|in:pending,confirmed,cancelled',
+    ]);
 
-        Reservation::created($validated);
+    // 2. On crée la réservation en associant start_date -> check_in_date et end_date -> check_out_date
+    Reservation::create([
+        'client_id' => $validated['client_id'],
+        'room_id' => $validated['room_id'],
+        'check_in_date' => $validated['start_date'],  // Mappe vers ta colonne SQL
+        'check_out_date' => $validated['end_date'],    // Mappe vers ta colonne SQL
+        'total_price' => $validated['total_price'],
+        'status' => $validated['status'],
+    ]);
 
-        //Changer le statut de la chambre en occupied
-        Room::where('id', $request->room_id)->update(['status' => 'occupied']);
-        return redirect()->route('reservations.index');
-    }
+    // 3. Changement automatique du statut de la chambre à 'occupied'
+    $room = Room::find($request->room_id);
+    $room->update(['status' => 'occupied']);
+
+    return redirect()->route('reservations.index');
+}
 }

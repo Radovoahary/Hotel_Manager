@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     // Gestion des Chambres (Index + Ajout corrigé)
     Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
     Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
+    Route::patch('/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
 
     // Gestion des Clients
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
