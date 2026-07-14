@@ -85,7 +85,7 @@ export default function Index({ rooms }: Props) {
                         onClick={handleCreateOpen}
                         className="inline-flex justify-center items-center rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-5 shadow-lg shadow-indigo-600/20 transition-all duration-150 active:scale-95"
                     >
-                        <span className="mr-2">➕</span> Ajouter une Chambre
+                        <span className="mr-2"></span> Ajouter une Chambre
                     </button>
                 </div>
 
@@ -106,7 +106,7 @@ export default function Index({ rooms }: Props) {
                                 {rooms.length === 0 ? (
                                     <tr>
                                         <td colSpan={5} className="px-6 py-12 text-center text-sm text-gray-400">
-                                            <div className="text-2xl mb-2">🛏️</div>
+                                            <div className="text-2xl mb-2"></div>
                                             Aucune chambre enregistrée pour le moment.
                                         </td>
                                     </tr>
@@ -162,7 +162,7 @@ export default function Index({ rooms }: Props) {
                     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
                         <div className="bg-[#12111A] border border-[#2A283E] rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150">
                             <h3 className="text-lg font-black text-white tracking-tight">
-                                {editingRoom ? '✏️ Modifier la chambre' : '✨ Ajouter une chambre'}
+                                {editingRoom ? ' Modifier la chambre' : ' Ajouter une chambre'}
                             </h3>
                             
                             <form onSubmit={handleSubmit} className="space-y-4">

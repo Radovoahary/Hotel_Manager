@@ -85,7 +85,7 @@ export default function Index({ clients }: Props) {
                         onClick={handleCreateOpen}
                         className="inline-flex justify-center items-center rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-5 shadow-lg shadow-indigo-600/20 transition-all duration-150 active:scale-95"
                     >
-                        <span className="mr-2">👤</span> Ajouter un Client
+                        <span className="mr-2"></span> Ajouter un Client
                     </button>
                 </div>
 
@@ -105,7 +105,7 @@ export default function Index({ clients }: Props) {
                                 {clients.length === 0 ? (
                                     <tr>
                                         <td colSpan={4} className="px-6 py-12 text-center text-sm text-gray-400">
-                                            <div className="text-2xl mb-2">👥</div>
+                                            <div className="text-2xl mb-2"></div>
                                             Aucun client enregistré pour le moment.
                                         </td>
                                     </tr>

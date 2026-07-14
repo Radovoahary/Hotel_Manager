@@ -172,7 +172,7 @@ export default function Index({ reservations, clients, rooms }: Props) {
                 {isOpen && (
                     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
                         <div className="bg-[#12111A] border border-[#2A283E] rounded-2xl shadow-2xl max-w-md w-full p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150">
-                            <h3 className="text-lg font-black text-white tracking-tight">✨ Créer une nouvelle réservation</h3>
+                            <h3 className="text-lg font-black text-white tracking-tight"> Créer une nouvelle réservation</h3>
                             
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 {/* Choix du Client */}

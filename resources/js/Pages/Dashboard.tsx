@@ -46,7 +46,7 @@ export default function Dashboard({
                             <div className="text-xs font-semibold text-purple-400 uppercase tracking-wider">Clients Enregistrés</div>
                             <div className="mt-4 flex items-baseline justify-between">
                                 <div className="text-3xl font-black text-white tracking-tight">{total_clients}</div>
-                                <span className="text-lg">👥</span>
+                                <span className="text-lg"></span>
                             </div>
                             <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full blur-2xl pointer-events-none" />
                         </div>
