@@ -30,7 +30,7 @@ Le projet utilise une architecture moderne combinant la puissance backend de **L
 
 ---
 
-##  Guide d'Installation et Lancement (Pas à Pas)
+##  Guide d'Installation et Lancement
 
 Suivez scrupuleusement ces étapes pour installer et faire tourner l'application sur votre machine locale.
 
