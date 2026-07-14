@@ -36,7 +36,7 @@ export default function Dashboard({
                             <div className="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Chambres Totales</div>
                             <div className="mt-4 flex items-baseline justify-between">
                                 <div className="text-3xl font-black text-white tracking-tight">{total_rooms}</div>
-                                <span className="text-lg">🛏️</span>
+                                <span className="text-lg"></span>
                             </div>
                             <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
                         </div>
@@ -56,7 +56,7 @@ export default function Dashboard({
                             <div className="text-xs font-semibold text-pink-400 uppercase tracking-wider">Réservations</div>
                             <div className="mt-4 flex items-baseline justify-between">
                                 <div className="text-3xl font-black text-white tracking-tight">{total_reservations}</div>
-                                <span className="text-lg">📅</span>
+                                <span className="text-lg"></span>
                             </div>
                             <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-full blur-2xl pointer-events-none" />
                         </div>
