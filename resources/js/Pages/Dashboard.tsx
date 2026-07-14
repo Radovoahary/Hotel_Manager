@@ -66,7 +66,7 @@ export default function Dashboard({
                             <div className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Revenus Totaux</div>
                             <div className="mt-4 flex items-baseline justify-between">
                                 <div className="text-3xl font-black text-emerald-400 tracking-tight">{formattedRevenue} €</div>
-                                <span className="text-lg">✨</span>
+                                <span className="text-lg"></span>
                             </div>
                             <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
                         </div>

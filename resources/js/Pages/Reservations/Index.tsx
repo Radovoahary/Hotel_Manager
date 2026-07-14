@@ -93,7 +93,7 @@ export default function Index({ reservations, clients, rooms }: Props) {
                         onClick={() => setIsOpen(true)}
                         className="inline-flex justify-center items-center rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-5 shadow-lg shadow-indigo-600/20 transition-all duration-150 active:scale-95"
                     >
-                        <span className="mr-2">📅</span> Nouvelle Réservation
+                        <span className="mr-2"></span> Nouvelle Réservation
                     </button>
                 </div>
 
